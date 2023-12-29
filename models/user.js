@@ -7,11 +7,16 @@ connect.then(()=>{
 })
 .catch((err)=>{
     console.log('Failed to Connect Database...');
+    console.log(err.message)
 })
 
 
 const Loginschema = new mongoose.Schema({
 
+    userName: {
+        type: String,
+        required:true
+    },
     name: {
         type:String,
         required: true
