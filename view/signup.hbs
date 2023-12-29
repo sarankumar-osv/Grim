@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+
+    center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #6610f2;
+    }
+
+    table {
+      width: 100%;
+    }
+
+    tr {
+      margin-bottom: 10px;
+    }
+
+    td {
+      padding: 10px;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #6610f2;
+      color: #f2f2f2;
+      padding: 10px;
+      font-weight: bold;
+      border: none;
+      border-radius: 4px;
+      border: 2px solid #472ddb;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 10px;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #f2f2f2;
+      font-weight: bold;
+      color: #6610f2;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #472ddb;
+    }
+        a:hover {
+      color: #1459da;
+    }
+    p {
+      text-align: center;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #333;
+    }
+
+  </style>
+</head>
+
+<body>
+  <center>
+    <form action="users/saveRegisterDetails" method="post">
+      <h1>Sign Up</h1>
+      <table>
+        <tr>
+          <td>Your Name :</td>
+          <td>
+            <input id="name" name="name" type="text" placeholder="Enter Your Name" autocomplete="off" required />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Email Id :</td>
+          <td>
+            <input id="email" type="email" name="email" placeholder="you@gmail.com" autocomplete="off" required />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Age :</td>
+          <td>
+            <input id="age" name="age" type="number" placeholder="Enter Your Age" max="100" autocomplete="off" required />
+          </td>
+        </tr>
+
+        <tr>
+          <td>Mobile Number :</td>
+          <td><input id="phone" name="phone" type="number" placeholder=" +91 8569784578" autocomplete="off" max="9999999999" required/></td>
+        </tr>
+        <tr>
+          
+        <tr>
+          <td>Gender :</td>
+          <td>
+            <select id="gender" name="gender" required>
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select><br />
+          </td>
+        </tr>
+
+      </table>
+
+      <input type="submit" value="Sign Up" />
+      
+      <p>Already have an account ?<a href="/">Sign In</a></p>
+      
+    </form>
+    
+  </center>
+  
+</body>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Users List</title>
+    <script>
+  function confirmAndAlert(message) {
+    if (confirm(message)) {
+      alert('User Deleted Successfully...');
+      return true;
+    } else {
+      return false;
+    }
+  }
+    </script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+      * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        text-align: center;
+        color: #472ddb;
+        margin-top: 20px;
+      }
+
+      table {
+        width: 70%; 
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      th, td {
+        border: 1px solid #ddd;
+        text-align: center;
+        padding: 9px; 
+      }
+
+      th {
+        background-color: #472ddb;
+        color: #fff;
+      }
+
+      .edit-icon, .delete-icon {
+        margin: 0 5px;
+        cursor: pointer;
+      }
+
+      .edit-icon:hover, .delete-icon:hover {
+        opacity: 0.8;
+      }
+
+      .goback-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .goback {
+        display: inline-block;
+        padding: 6px 8px;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #6610f2;
+        color: #f2f2f2;
+        border: 2px solid #6610f2;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .goback:hover {
+        background-color: #f2f2f2;
+        color: #6610f2;
+      }
+
+      .pagination-container {
+        text-align: center;
+        margin-top: 20px;
+        color: #6610f2;
+      }
+
+      .pagination-link {
+        display: inline-block;
+        padding: 6px 10px;
+        margin: 0 4px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        text-decoration: none;
+        background-color: #6610f2;
+        color: #f2f2f2;
+        border: 2px solid #472ddb;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      .pagination-container:hover {
+        color: #6610f2;
+      }
+      .pagination-link:hover {
+        background-color: #f2f2f2;
+        color: #6610f2;
+      }
+
+      .pagination-link:disabled {
+        background-color: #ccc;
+        color: #666;
+        cursor: not-allowed;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>List Of Users</h1>
+    <center>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Gender</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each users}}
+            <tr>
+              <td>{{name}}</td>
+              <td>{{email}}</td>
+              <td>{{age}}</td>
+              <td>{{phone}}</td>
+              <td>{{gender}}</td>
+              <td><a href="/userEdit/{{_id}}" class="edit-icon"><img src="https://previews.dropbox.com/p/thumb/ACEF4sgoeKPEoW9SSBXI0-CKFGD8Kcrt26vRp2H_jaZLDuj5ehp4dsyJOxWwpMO-UgSZ5iAMAG_3fLzx80e906NiI_WylKkT3iiQCvKUlGdTCe2xea9PhDFfH8DYf7yUgWUIb7ajKKBSNIy1ckOg7En0ejhgFKwpRO0JkGTLn6ogNorIhz5UOkTZMlBFjQNoNBZ-B-cttuqKMLEpNgm8SlouD_RAatPOpZK67ib1wp5rOQHcs83ArUOA9X85gLYfnj3Y4ZFmQBjI64_SAy02PPwhMWTyDi-sJnLzpnwF6AI7et6hU_lZnQ8QDNzx7UpLXQGy1XWSHGLjGKTau7Wtqs-i/p.png" width="20"></a></td>
+              <td><a href="/userDelete/{{_id}}" class="delete-icon" onclick ="return confirmAndAlert('Are You Sure You Want To Delate ?')"><img src="https://previews.dropbox.com/p/thumb/ACFjYMSVDpXf3NStx0Hc24EjC_aG1UGEenXksLvJL4OUIfcnx6GSd9M3U5jfT5Un-1sRu2ou79EbDQ_I4ZI9GhUMl11HmyYuwVwRLEOjXJlDdBZcD7QsE9vN0E9KPKauwI8vmitNFLDukWjZ9t0rwkKvovIvpscaVWuNUMszs-ZUuWWk4cs9ha4d0TPAXWNeJ1pfXotY83oj8oFZcNGj5jn2fElKDurqS5KdZBT-x4MwoWQMmMFlB1Dw6MMMzCCOXfNnbMKWhJHD5OG-2Y44-tXFfJX5dPe-0vkFYOYbCWzbOuX1KlAVTQh7Ej9ygaHV_nC5Zf5xKyluoFzWhUpw1hVm/p.png" width="20"></a></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+
+
+      {{!-- <!-- Pagination -->
+        <div class="pagination-container">
+          {{#if hasPrev}}
+              <a href="/userList?page={{prevPage}}" class="pagination-link">&laquo; Previous</a>
+          {{/if}}
+
+          {{#if hasNext}}
+              <a href="/userList?page={{nextPage}}" class="pagination-link">Next &raquo;</a>
+          {{/if}}
+        </div> --}}
+
+        <div class="goback-container">
+            <a class="goback" href="/home">Go back!</a>
+        </div>
+
+    </center>
+  </body>
+</html>
