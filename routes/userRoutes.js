@@ -17,88 +17,88 @@ router.use(express.urlencoded({extended: false }));
 router.use(bodyParser.json());
 
 // Signup
-router.post("/saveRegisterDetails", async (req, res) => {
+router.post('/saveRegisterDetails', async (req, res)=>{
   const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    age: req.body.age,
-    phone: req.body.phone,
-    gender: req.body.gender,
+      name : req.body.name,
+      email : req.body.email,
+      age : req.body.age,
+      phone : req.body.phone,
+      gender: req.body.gender
   });
 
-  // Genarate Random Password
-    const password = Math.random().toString(36).substring(2,7);
-    console.log(`Name : ${user.name} \nUsername : ${user.email} \nPassword : ${password}`);
-  // Encrypt Password
-    const saltRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltRounds);
+// Generate Random Username
 
-    user.password = hashedPassword;
+const uniqueNumber = Math.floor(1000 + Math.random()*9000);
+const userName = `${user.name.toLowerCase()}${uniqueNumber}`;
 
-  // Send Mail to the user
-  try {
-    const a1 = await user.save()
-    
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: 'verifyuserofficial@gmail.com',
-        pass: 'wsdv megz vecp wzen',
-      },
-    });
-    
-    const mailOptions = {
-      from: 'verifyuserofficial@gmail.com',
-      to: user.email,
-      subject: 'Registration Successful',
-      text: `Dear ${user.name},\n\nThank You For Registering...\n\nUsername - ${user.email}\n\nPassword - ${password}`,
-    };
-    
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.error(error);
-        res.json({ error: 'Failed to send registration email.' });
-      } else {
-        console.log('Email sent to user...');
-        res.json({ message: 'Registration successful. Email sent.' });
-      }
-    });
+user.userName = userName;
 
-    res.redirect("/signupSuccess");
+// Generate Random Password
 
-} catch (err) {
-  res.send("Error");
-}
+const password = Math.random().toString(36).substring(2,8);
+console.log(`Name : ${user.name} \nUsername: ${userName} \nPassword : ${password}`)
 
+const saltRounds = 10;
+const hashedPassword = await bcrypt.hash(password,saltRounds);
+
+user.password = hashedPassword;
+
+// Send Mail
+try {
+  const a1 = await user.save()
+
+
+const transPorter = nodemailer.createTransport({
+  service:'gmail',
+  auth:{
+      user: 'verifyuserofficial@gmail.com',
+      pass: 'wsdv megz vecp wzen'
+  },
 });
 
-// Login
+const mailOptions = {
+  from :'verifyuserofficial@gmail.com',
+  to: user.email,
+  subject: 'Registration Succesfully...',
+  text:`Dear ${user.name},\n\nThank You For Registering...\n\nUsername : "${userName}" \nPassword : "${password}"`,
+};
 
-router.post("/userLogin", async (req, res) => {
-    try {
-      // Get user from db
-        const user = await collection.findOne({ email: req.body.email });
-        if (!user) {
-            res.send("User not found")
-        }
-        //  Check Password
-        const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
-        if (!isPasswordMatch) {
-            // res.send("Wrong Password");
-            res.redirect('/');
-        }
-        else {
-          const accessToken = await authFile.token(user);
-          res.cookie("access-token", accessToken,{
-          maxAge: 60* 60 * 24 * 30 * 1000
-        });
+transPorter.sendMail(mailOptions, (err, info) =>{
+  if(err){
+      console.log(err, "Email Sent Failed...");
+  }else {
+      console.log("Email Sent Successfully....");
+  }
+});
 
-          res.status(200).redirect("/home");
-        }
+res.redirect('/signupSuccess');
+
+} catch (error) {
+  res.send(err.message, "Error")
+  }
+});
+
+router.post('/userLogin', async (req, res) => {
+  try {
+    const user = await User.findOne({ userName: req.body.userName });
+    if (!user) {
+      return res.send('User Not Found!');
     }
-    catch (err){
-        console.log(err);
+    const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!isPasswordMatch) {
+      return res.send('Wrong Password');
     }
+
+    const accessToken = await authFile.token(user);
+    res.cookie('access-token', accessToken, {
+      maxAge: 60 * 60 * 24 * 30 * 1000,
+    });
+
+    res.status(200).redirect('/home');
+  } catch (err) {
+    console.log(err);
+    res.send('An error occurred while processing your request');
+  }
 });
 
 router.post("/createtoken", async (req, res) => {
