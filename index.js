@@ -9,7 +9,6 @@ const auth = require('./middleware/auth');
 const app = express();
 app.use(cookieParser())
 
-app.use(express.static(path.join(__dirname, './view')))
 
 app.use('/users', userRouter)
 
@@ -17,9 +16,8 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
 
-const viewPath = path.join(__dirname, './view')
-
 app.set('view engine', 'hbs')
+const viewPath = path.join(__dirname, 'view')
 app.set('views', viewPath)
 
 app.get("/", (req, res) => {
@@ -42,13 +40,33 @@ app.get("/sessionExpired", (req, res)=>{
   res.render("session")
 })
 
+const ITEMS_PER_PAGE = 5; 
+
 app.get("/userList", auth.validateToken, async (req, res) => {
-  try {
-    const users = await collection.find({isDelete:false})
-    res.render("userList", { users })
+    try {
+        const page = parseInt(req.query.page) || 1;
+    
+    const totalUsers = await collection.countDocuments({ isDelete: false });
+    const totalPages = Math.ceil(totalUsers / ITEMS_PER_PAGE);
+
+    const users = await collection
+      .find({ isDelete: false })
+      .skip((page - 1) * ITEMS_PER_PAGE)
+      .limit(ITEMS_PER_PAGE);
+
+    const hasPrev = page > 1;
+    const hasNext = page < totalPages;
+
+    res.render("userList", {
+      users,
+      hasPrev,
+      hasNext,
+      prevPage: page - 1,
+      nextPage: page + 1,
+    });
   } catch (err) {
     console.error(err);
-    res.send("Error",(err));
+    res.send("Error", err);
   }
 });
 
@@ -105,72 +123,3 @@ const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`)
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const ITEMS_PER_PAGE = 5; 
-
-// app.get("/userList", auth.validateToken, async (req, res) => {
-//     try {
-//         const page = parseInt(req.query.page) || 1;
-    
-//     const totalUsers = await collection.countDocuments({ isDelete: false });
-//     const totalPages = Math.ceil(totalUsers / ITEMS_PER_PAGE);
-
-//     const users = await collection
-//       .find({ isDelete: false })
-//       .skip((page - 1) * ITEMS_PER_PAGE)
-//       .limit(ITEMS_PER_PAGE);
-
-//     const hasPrev = page > 1;
-//     const hasNext = page < totalPages;
-
-//     res.render("userList", {
-//       users,
-//       hasPrev,
-//       hasNext,
-//       prevPage: page - 1,
-//       nextPage: page + 1,
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     res.send("Error", err);
-//   }
-// });
