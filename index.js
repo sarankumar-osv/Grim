@@ -9,6 +9,8 @@ const auth = require('./middleware/auth');
 const app = express();
 app.use(cookieParser())
 
+app.use(express.static(path.join(__dirname, './view')))
+
 app.use('/users', userRouter)
 
 app.use(express.json());
