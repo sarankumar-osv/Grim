@@ -40,7 +40,7 @@ app.get("/sessionExpired", (req, res)=>{
   res.render("session")
 })
 
-const ITEMS_PER_PAGE = 5; 
+const ITEMS_PER_PAGE = 10; 
 
 app.get("/userList", auth.validateToken, async (req, res) => {
     try {
