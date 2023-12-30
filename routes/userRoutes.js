@@ -59,7 +59,7 @@ const transPorter = nodemailer.createTransport({
 const mailOptions = {
   from :'verifyuserofficial@gmail.com',
   to: user.email,
-  subject: 'Registration Succesfully...',
+  subject: 'Registration Successful!',
   html: `
   <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +70,7 @@ const mailOptions = {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       font-size: 16px;
       line-height: 1.6;
-      color: #333; /* Default text color */
+      color: #333; 
       margin: 0;
       padding: 0;
     }
@@ -84,7 +84,7 @@ const mailOptions = {
     }
     h1 {
       font-size: 36px;
-      color: #007bff; /* Updated color */
+      color: #007bff;
       margin-bottom: 20px;
       text-align: center;
       text-transform: uppercase;
@@ -123,7 +123,7 @@ const mailOptions = {
 <body>
   <div class="container">
     <h1>Welcome to Our Community! 🎉</h1>
-    <p>Dear ${user.name},</p> <!-- Default text color -->
+    <p>Dear ${user.name},</p> 
     <p>We are thrilled to welcome you to our community! Your account has been successfully created 🚀.</p>
     <p>Here are your login details:</p>
     <ul>
