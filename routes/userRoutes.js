@@ -60,7 +60,85 @@ const mailOptions = {
   from :'verifyuserofficial@gmail.com',
   to: user.email,
   subject: 'Registration Succesfully...',
-  text:`Dear ${user.name},\n\nThank You For Registering...\n\nUsername : "${userName}" \nPassword : "${password}"`,
+  html: `
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Welcome to Our Community!</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      color: #333; /* Default text color */
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 36px;
+      color: #007bff; /* Updated color */
+      margin-bottom: 20px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    p {
+      margin-bottom: 15px;
+      text-align: justify;
+    }
+    ul {
+      margin-bottom: 15px;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      font-size: 14px;
+      color: #999;
+      margin-top: 20px;
+      text-align: center;
+    }
+    .highlight {
+      background-color: #eaf6ff;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Our Community!</h1>
+    <p>Dear ${user.name},</p> <!-- Default text color -->
+    <p>We are thrilled to welcome you to our community! Your account has been successfully created.</p>
+    <p>Here are your login details:</p>
+    <ul>
+      <li><strong>Username:</strong> ${userName}</li>
+      <li><strong>Password:</strong> ${password}</li>
+    </ul>
+    <p>If you have any questions or need further assistance, please feel free to <a href="mailto:verifyuserofficial@gmail.com" style="color: #007bff; text-decoration: none;">contact us</a>.</p>
+    <p>Best regards,<br>Saran Kumar</p>
+    <div class="footer">
+      This is an automated message. Please do not reply to this email.
+    </div>
+  </div>
+</body>
+</html>
+`
 };
 
 transPorter.sendMail(mailOptions, (err, info) =>{
