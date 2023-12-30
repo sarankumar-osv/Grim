@@ -122,9 +122,9 @@ const mailOptions = {
 </head>
 <body>
   <div class="container">
-    <h1>Welcome to Our Community!</h1>
+    <h1>Welcome to Our Community! 🎉</h1>
     <p>Dear ${user.name},</p> <!-- Default text color -->
-    <p>We are thrilled to welcome you to our community! Your account has been successfully created.</p>
+    <p>We are thrilled to welcome you to our community! Your account has been successfully created 🚀.</p>
     <p>Here are your login details:</p>
     <ul>
       <li><strong>Username:</strong> ${userName}</li>
