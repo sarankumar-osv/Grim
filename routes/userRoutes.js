@@ -127,11 +127,11 @@ const mailOptions = {
     <p>We are thrilled to welcome you to our community! Your account has been successfully created 🚀.</p>
     <p>Here are your login details:</p>
     <ul>
-      <li><strong>Username:</strong> ${userName}</li>
-      <li><strong>Password:</strong> ${password}</li>
+      <li><strong>Username : </strong> ${userName}</li>
+      <li><strong>Password : </strong> ${password}</li>
     </ul>
     <p>If you have any questions or need further assistance, please feel free to <a href="mailto:verifyuserofficial@gmail.com" style="color: #007bff; text-decoration: none;">contact us</a>.</p>
-    <p>Best regards,<br>Saran Kumar</p>
+    <p>Best regards,<br>Saran Kumar.</p>
     <div class="footer">
       This is an automated message. Please do not reply to this email.
     </div>
@@ -144,6 +144,7 @@ const mailOptions = {
 transPorter.sendMail(mailOptions, (err, info) =>{
   if(err){
       console.log(err, "Email Sent Failed...");
+      res.send(err.message)
   }else {
       console.log("Email Sent Successfully....");
   }
@@ -151,7 +152,7 @@ transPorter.sendMail(mailOptions, (err, info) =>{
 
 res.redirect('/signupSuccess');
 
-} catch (error) {
+} catch (err) {
   res.send(err.message, "Error")
   }
 });
