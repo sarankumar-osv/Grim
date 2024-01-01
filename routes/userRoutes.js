@@ -201,10 +201,10 @@ router.get("/sendMail", async (req, res) => {
 
     for (let i = 0; i < userEmails.length; i++) {
       mailOptions.to = userEmails[i];
-      mailOptions.html = `
+      mailOptions.html =`
       <!DOCTYPE html>
-    <html lang="en">
-    <head>
+      <html lang="en">
+      <head>
       <title>Welcome to Our Community!</title>
       <style>
       body {
@@ -234,22 +234,22 @@ router.get("/sendMail", async (req, res) => {
         color: #777777;
         text-align: center;
       }
-    </style>
-    </head>
-    <body>
-  <div class="container">
-    <h1>HAPPY DIWALI 🎉</h1>
-    <p>Dear User,</p>
-    <p>May the divine light of Diwali spread into your life peace, prosperity, happiness, and good health. Wishing you a Happy Diwali!</p>
-    <p>If you have any questions or need further assistance, please feel free to <a href="mailto:verifyuserofficial@gmail.com" style="color: #007bff; text-decoration: none;">contact us</a>.</p>
-    <p>Best regards,<br>Saran Kumar.</p>
-    <div class="footer">
+      </style>
+      </head>
+      <body>
+      <div class="container">
+      <h1>HAPPY NEW YEAR 2024 🎉</h1>
+      <p>Dear User,</p>
+      <p>As we step into the new year, we want to extend our warmest wishes to you. May the year 2024 bring you joy, success, and prosperity in all your endeavors.<br><br> Have a Great Day 😊...</p>
+      <p>If you have any questions or need further assistance, please feel free to <a href="mailto:verifyuserofficial@gmail.com" style="color: #007bff; text-decoration: none;">contact us</a>.</p>
+      <p>Best regards,<br>Saran Kumar.</p>
+      <div class="footer">
       This is an automated message. Please do not reply to this email.
-    </div>
-  </div>
-</body>
-    </html>
-    `;
+      </div>
+      </div>
+      </body>
+      </html>
+      `;
 
       transporter.sendMail(mailOptions, (err, info) => {
         if (err) {
