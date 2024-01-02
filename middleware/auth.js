@@ -24,7 +24,7 @@ exports.validateToken = async (req, res, next) => {
 
 exports.logout = (req, res) => {
   res.clearCookie("access-token");
-  res.redirect("/");
+  res.redirect("/main");
 };
 
 exports.newValidateToken = async (req,res,next) => {
