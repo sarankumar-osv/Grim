@@ -4,7 +4,6 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const collection = require("./models/user");
 const userRouter = require('./routes/userRoutes')
-const orderRoutes = require('./routes/orderRoutes');
 const auth = require('./middleware/auth');
 const app = express();
 app.use(cookieParser())
@@ -21,7 +20,15 @@ const viewPath = path.join(__dirname, 'view')
 app.set('views', viewPath)
 
 app.get("/", (req, res) => {
-    res.render("login");
+    res.render("main");
+});
+
+app.get("/main", (req, res)=>{
+  res.redirect('/')
+})
+
+app.get("/signin", (req, res) => {
+  res.render("login");
 });
 
 app.get("/signup", (req, res) => {
@@ -111,7 +118,7 @@ app.get("/userDelete/:userId", auth.validateToken, async (req, res) => {
 });
 
 app.get('/logout', auth.logout, (req, res) => {
-  res.redirect('/');
+  res.redirect('/main');
 });
 
 
