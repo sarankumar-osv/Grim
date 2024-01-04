@@ -161,11 +161,11 @@ router.post('/userLogin', async (req, res) => {
   try {
     const user = await User.findOne({ userName: req.body.userName });
     if (!user) {
-      return res.send('User Not Found!');
+      return res.send('<script>alert("Incorrect Username"); window.location.href = "/signin";</script>');
     }
     const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
     if (!isPasswordMatch) {
-      return res.send('Wrong Password');
+      return res.send('<script>alert("Wrong Password"); window.location.href = "/signin";</script>');
     }
 
     const accessToken = await authFile.token(user);
