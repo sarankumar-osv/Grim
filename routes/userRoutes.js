@@ -196,7 +196,7 @@ router.get("/sendMail", async (req, res) => {
 
     const mailOptions = {
       from: "verifyuserofficial@gmail.com",
-      subject: "Happy Diwali 🎉.",
+      subject: "Happy New Year 🎉.",
     };
 
     for (let i = 0; i < userEmails.length; i++) {
