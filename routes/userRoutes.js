@@ -170,7 +170,7 @@ router.post('/userLogin', async (req, res) => {
 
     const accessToken = await authFile.token(user);
     res.cookie('access-token', accessToken, {
-      maxAge: 5 * 60 * 1000,
+      maxAge: 15 * 60 * 1000,
     });
 
     res.status(200).redirect('/home');
