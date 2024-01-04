@@ -30,6 +30,10 @@ app.get("/main", (req, res)=>{
   res.redirect('/')
 })
 
+app.get("/contact", (req, res)=>{
+  res.render('contact')
+})
+
 app.get("/signin", (req, res) => {
   res.render("login");
 });
