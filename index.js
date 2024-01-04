@@ -3,6 +3,8 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const collection = require("./models/user");
+const Contact = require('./models/contact')
+const contactRouter = require('./routes/contactRouter')
 const userRouter = require('./routes/userRoutes')
 const auth = require('./middleware/auth');
 const app = express();
@@ -10,6 +12,7 @@ app.use(cookieParser())
 
 
 app.use('/users', userRouter)
+app.use('/contactUs', contactRouter);
 
 app.use(express.json());
 
@@ -121,6 +124,15 @@ app.get('/logout', auth.logout, (req, res) => {
   res.redirect('/main');
 });
 
+app.get('/messages', auth.validateToken, async (req, res) => {
+  try {
+    const messages = await Contact.find();
+    res.render('message', { messages });
+  } catch (err) {
+    console.log(err);
+    res.send(err);
+  }
+});
 
 app.use((req, res)=>{
 res.status(404).render("404")
