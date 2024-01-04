@@ -75,7 +75,30 @@ strong {
     font-weight: bold;
     color: #6610f2;
 }
+.goback-container {
+        text-align: center;
+        margin-top: 20px;
+      }
 
+      .goback {
+        display: inline-block;
+        padding: 6px 8px;
+        font-size: 14px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #6610f2;
+        color: #f2f2f2;
+        border: 2px solid #6610f2;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .goback:hover {
+        background-color: #f2f2f2;
+        color: #6610f2;
+      }
 </style>
 </head>
 <body>
@@ -96,6 +119,9 @@ strong {
                 </li>
             {{/each}}
         </ul>
+    </div>
+    <div class="goback-container">
+        <a class="goback" href="/home">Go back!</a>
     </div>
 </body>
 </html>
