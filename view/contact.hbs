@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="icon" href="https://i.postimg.cc/63V6Cvwk/chat-1.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #6610f2;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color: #6610f2;
+            color: #f2f2f2;
+            font-weight: bold;
+            padding: 10px;
+            border: none;
+            font-size: 15px;
+            border-radius: 4px;
+            border: 2px solid #472ddb;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #f2f2f2;
+            color: #6610f2;
+            font-weight: bold;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #333;
+        }
+        .goback {
+            display: inline-block;
+            padding: 8px 14px;
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+            text-decoration: none;
+            background-color: #6610f2;
+            color: #f2f2f2;
+            border: 2px solid #6610f2;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .goback:hover {
+            background-color: #f2f2f2;
+            color: #6610f2;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <form action="contactUs/submit-form" method="post">
+        <h2>Contact Us</h2>
+        <div class="input-group">
+            <label for="name">Name :</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Message :</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit">Send</button>
+        <br><br>
+        <button type="Home" onclick="history.back()" class="goback">Home</button>
+
+    </form>
+
+</body>
+</html>
