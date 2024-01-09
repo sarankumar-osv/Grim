@@ -53,7 +53,12 @@ const Loginschema = new mongoose.Schema({
     otp: {
         type: String,
         required: false
-      },
+    },
+    createdAt: {
+        type: Date,
+        immutable: true,
+        default: () => Date.now(),
+    }
 
 });
 
