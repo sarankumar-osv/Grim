@@ -38,6 +38,10 @@ app.get("/signin", (req, res) => {
   res.render("login");
 });
 
+app.get('/verifyOTP', (req, res) => {
+  res.render('verifyOTP');
+});
+
 app.get("/signup", (req, res) => {
     res.render("signup");
 });
