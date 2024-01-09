@@ -10,7 +10,6 @@ connect.then(()=>{
     console.log(err.message)
 })
 
-
 const Loginschema = new mongoose.Schema({
 
     userName: {
@@ -50,12 +49,14 @@ const Loginschema = new mongoose.Schema({
     },
     token: {
         type: String
-    }
+    },
+    otp: {
+        type: String,
+        required: false
+      },
 
 });
 
-// module.exports = mongoose.model('users', Loginschema)
+  
 
-const collection = new mongoose.model("users", Loginschema);
-
-module.exports = collection;
+module.exports = mongoose.model('users', Loginschema)
