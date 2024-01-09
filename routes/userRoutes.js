@@ -280,7 +280,7 @@ router.post("/userLogin", async (req, res) => {
         );
       }
       console.log("OTP sent successfully");
-      res.redirect("/verifyOTP");
+      res.render("VerifyOTP", {user: user} );
     });
   } catch (err) {
     console.log("Error in userLogin:", err);
