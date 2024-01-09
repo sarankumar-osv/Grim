@@ -42,10 +42,6 @@ app.get("/signup", (req, res) => {
     res.render("signup");
 });
 
-app.get("/signupSuccess", (req, res)=>{
-    res.render("signupSuccess")
-})
-
 app.get("/home", (req, res)=>{
     res.render("home")
 });
