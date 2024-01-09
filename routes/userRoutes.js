@@ -150,7 +150,7 @@ transPorter.sendMail(mailOptions, (err, info) =>{
   }
 });
 
-res.redirect('/signupSuccess');
+res.render("signupSuccess");
 
 } catch (err) {
   res.send(err.message, "Error")
