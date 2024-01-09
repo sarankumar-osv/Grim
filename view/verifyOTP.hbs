@@ -61,7 +61,7 @@
 
     button[type="submit"],
     button[type="button"] {
-      width: 30%;
+      width: 25%;
       background-color: #6610f2;
       color: #f2f2f2;
       font-weight: bold;
@@ -90,8 +90,9 @@
   </style>
 </head>
 <body>
-  <form action="users/verifyOTP" method="post">
+  <form action="/users/verifyOTP" method="post">
     <h2>Verify OTP</h2>
+    <p>OTP has been sent to {{user.email}}.</p>
     <div class="input-group">
       <label for="otp">OTP:</label>
       <input type="number" id="otp" name="otp" autocomplete="off" required>
