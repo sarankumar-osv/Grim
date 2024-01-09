@@ -157,26 +157,163 @@ res.redirect('/signupSuccess');
   }
 });
 
-router.post('/userLogin', async (req, res) => {
+router.post("/userLogin", async (req, res) => {
   try {
     const user = await User.findOne({ userName: req.body.userName });
     if (!user) {
-      return res.send('<script>alert("Incorrect Username"); window.location.href = "/signin";</script>');
+      return res.send(
+        '<script>alert("Incorrect Username"); window.location.href = "/signin";</script>'
+      );
     }
-    const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
+    const isPasswordMatch = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
     if (!isPasswordMatch) {
-      return res.send('<script>alert("Wrong Password"); window.location.href = "/signin";</script>');
+      return res.send(
+        '<script>alert("Wrong Password"); window.location.href = "/signin";</script>'
+      );
     }
 
-    const accessToken = await authFile.token(user);
-    res.cookie('access-token', accessToken, {
-      maxAge: 15 * 60 * 1000,
+    const OTP = Math.floor(100000 + Math.random() * 900000);
+    console.log(OTP);
+
+    user.otp = OTP;
+    await user.save();
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "verifyuserofficial@gmail.com",
+        pass: "wsdv megz vecp wzen",
+      },
     });
 
-    res.status(200).redirect('/home');
+    const mailOptions = {
+      from: "verifyuserofficial@gmail.com",
+      to: user.email,
+      subject: "Email Verification",
+      html: `<!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Email Verification</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+            margin: 0;
+            padding: 0;
+          }
+      
+          .container {
+            width: 80%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            padding: 30px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+          }
+      
+          .header {
+            text-align: center;
+            margin-bottom: 20px;
+          }
+      
+          .header h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #007bff; 
+          }
+      
+          .content {
+            line-height: 1.5;
+          }
+      
+          .otp-code {
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px 20px;
+            border-radius: 5px;
+          }
+      
+          .footer {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>Email Verification</h1>
+          </div>
+          <div class="content">
+            <p>Hello ${user.name},</p>
+            <p>Please use the following OTP to verify your login:</p>
+            <p class="otp-code">${OTP}</p>
+            <p>This OTP is valid for 10 Minutes.</p>
+            <p>If you didn't request this OTP, please ignore this email.</p>
+          </div>
+          <div class="footer">
+            <p>Thank you.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+      `,
+    };
+
+    transporter.sendMail(mailOptions, (err, info) => {
+      if (err) {
+        console.log("Error sending OTP email:", err);
+        return res.send(
+          '<script>alert("Error sending OTP"); window.location.href = "/signin";</script>'
+        );
+      }
+      console.log("OTP sent successfully");
+      res.redirect("/verifyOTP");
+    });
   } catch (err) {
-    console.log(err);
-    res.send('An error occurred while processing your request');
+    console.log("Error in userLogin:", err);
+    res.send("Internal Server Error");
+  }
+});
+
+router.post("/verifyOTP", async (req, res) => {
+  try {
+    const user = await User.findOne({ otp: req.body.otp });
+
+    if (!user) {
+      console.log("User not found");
+      return res.send(
+        '<script>alert("Incorrect OTP or OTP Expired!"); window.location.href = "/verifyOTP";</script>'
+      );
+    }
+
+    console.log("OTP Verified.");
+
+    user.isOTPVerified = true;
+    user.otp = null;
+    await user.save();
+
+    const accessToken = await authFile.token(user);
+    res.cookie("access-token", accessToken, {
+      maxAge: 10 * 60 * 1000,
+    });
+
+    res.redirect("/home");
+  } catch (error) {
+    console.error("Error in OTP verification:", error);
+    res.send("Internal Server Error");
   }
 });
 
