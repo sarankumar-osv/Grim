@@ -142,7 +142,7 @@ nav{
 .nav-link:hover{
   color: #3d6ef5ff;
   font-size: 17px;
-    transition: .3s;
+  transition: .3s;
 }
 .nav-menu-btn{
     display: none;
@@ -650,8 +650,7 @@ footer{
             </ul>
         </div>
         <div class="nav-button">
-            <a href="https://drive.google.com/uc?export=download&id=1sh4g0YS4M82QA5He2lvikUtsdm_9vF7z" download="Sarankumar-CV">
-        <button class="btn">Download CV <i class="uil uil-file-alt"></i></button></a>
+            <button class="btn" id="sendMail">Send Mail</button>
         </div>
         <div class="nav-menu-btn">
             <i class="uil uil-bars" onclick="myMenuFunction()"></i>
@@ -680,6 +679,7 @@ footer{
                 <a href="https://drive.google.com/uc?export=download&id=1sh4g0YS4M82QA5He2lvikUtsdm_9vF7z" download="Sarankumar-CV">
                 <button class="btn">Download CV <i class="uil uil-file-alt"></i></button></a>
           </div>
+          
             
             <div class="social_icons">
                 <div class="icon"><a href="https://www.instagram.com/iam_grim05/" target=”_blank”><i class="uil uil-instagram"></i></a></div>
@@ -801,7 +801,6 @@ footer{
 
     </main>
 
-
     <!-- --------------- FOOTER --------------- -->
     <footer>
         <div class="top-footer">
@@ -824,7 +823,7 @@ footer{
             </ul>
         </div>
         <div class="footer-social-icons">
-           <div class="icon"><a href="https://www.instagram.com/iam_grim05/" target=”_blank”><i class="uil uil-instagram"></i></a></div>
+            <div class="icon"><a href="https://www.instagram.com/iam_grim05/" target=”_blank”><i class="uil uil-instagram"></i></a></div>
                 <div class="icon"><a href="https://www.linkedin.com/in/sarankumars07/" target=”_blank”><i class="uil uil-linkedin-alt"></i></a></div>
                 <div class="icon"><a href="https://crud-5741.onrender.com/home" target=”_blank”><i class="uil uil-dribbble"></i></a></div>
                 <div class="icon"><a href="https://github.com/iamgrim07/Grim" target=”_blank”><i class="uil uil-github-alt"></i></a></div>
@@ -843,7 +842,15 @@ footer{
       } else {
         menuBtn.className = "nav-menu";
       }
-    }
+    };
+
+    document.getElementById('sendMail').addEventListener('click', async function() {
+        let response = await fetch('users/sendMail');
+    });
+    document.getElementById('sendMail').addEventListener('click', async function() {
+        alert('Mail sent successfully!');
+    });
+
     </script>
 </body>
 </html>
