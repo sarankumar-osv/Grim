@@ -60,11 +60,11 @@ html{
 
 /* ----- GLOBAL BUTTON DESIGN ----- */
 .btn{
-    font-weight: 500;
-    padding: 12px 20px;
+    padding: 10px 18px;
     background: #efefef;
     border: none;
     font-weight: bold;
+    border: 2.5px solid #3d6ef5ff;
     border-radius: 10px;
     cursor: pointer;
     transition: .4s;
@@ -447,19 +447,20 @@ textarea{
     resize: none;
 }
 .form-button>.btn{
-    font-weight: 500;
-    padding: 12px 20px;
-    background: #efefef;
-    border: none;
     font-weight: bold;
+    padding: 8px 16px;
+    background: #3d6ef5ff;
+    border: none;
+    border: 2.5px solid #3d6ef5ff;
+    color: #efefef;
     border-radius: 10px;
     cursor: pointer;
     transition: .4s;
 }
 .form-button>.btn:hover{
-    background: #3d6ef5ff;
+    background: #efefef;
     font-weight: bold;
-    color: var(--color-white);
+    color: #3d6ef5ff;
 }
 .form-button>i{
     margin-left: 10px;
@@ -790,7 +791,7 @@ footer{
                         <textarea name="message" placeholder="Message" required></textarea>
                     </div>
                     <div class="form-button">
-                        <button type="submit" class="btn">Send <i class="uil uil-message"></i></button>
+                        <button type="submit" class="btn">Send Message<i class="uil uil-message"></i></button>
                     </div>
              </form>
                 </div>
