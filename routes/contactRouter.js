@@ -9,7 +9,7 @@ router.use(express.json());
 router.use(express.urlencoded({extended: false }));
 router.use(bodyParser.json());
 
-router.post('/submit-form', authFile.validateToken, async (req, res) => {
+router.post('/submit-form', authFile. async (req, res) => {
     try {
       const contact = new Contact({
         name: req.body.name,
