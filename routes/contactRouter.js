@@ -92,7 +92,7 @@ router.post('/submit-form', authFile.validateToken, async (req, res) => {
       `
       });
         
-      res.send('<script>alert("Message Send Succesfull"); window.location.href = "/home";</script>');
+      res.send('<script>alert("Message Send Succesfull"); window.location.href = "/";</script>');
     } catch (err) {
       console.log(err.message);
       res.send('Internal Server Error');
